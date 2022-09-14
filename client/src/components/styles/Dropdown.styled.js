@@ -13,7 +13,7 @@ export const StyledDropdown = styled.div`
         box-shadow: 0 1px 10px ${({ theme }) => theme.colors.shadow};
         border: none;
         border-radius: 0.5em;
-        margin-top: 3px;
+        margin: 0;
         height: 2rem;
         cursor: text;
     }
@@ -39,6 +39,8 @@ export const StyledDropdown = styled.div`
         background-color: ${({ theme }) => theme.colors.thirdBackground};
         border-radius: 0;
         width: 100%;
+        padding: 0;
+        margin: 0;
         display: flex;
         align-items: center;
         color: black;

@@ -1,11 +1,17 @@
+import displayFunction from "../utils/displayFunction";
+import filterCountries from "../utils/filterCountries";
 import {
     ADD_ACTIVITY,
+    DISPLAY_COUNTRIES,
+    FILTER_BY_ACTIVITIES,
+    FILTER_BY_CONTINENT,
     GET_ACTIVITIES,
     GET_COUNTRIES,
     GET_COUNTRIES_BY_NAME,
     GET_COUNTRY_DETAIL,
     GET_COUNTRY_NAMES,
     OPEN_SIDEBAR,
+    SORTING,
 } from "./actions";
 
 const initialState = {
@@ -58,6 +64,39 @@ export default function reducer(state = initialState, { type, payload }) {
                 activities: payload,
             };
         }
+        case SORTING: {
+            return {
+                ...state,
+                sorting: payload,
+            };
+        }
+        case FILTER_BY_ACTIVITIES: {
+            return {
+                ...state,
+                filtersActivities: payload,
+            };
+        }
+        case FILTER_BY_CONTINENT: {
+            return {
+                ...state,
+                filtersContinent: payload,
+            };
+        }
+        case DISPLAY_COUNTRIES:
+            const countriesToDisplay = state.countriesByName.length
+                ? state.countriesByName
+                : state.allCountries;
+            const countries = displayFunction(
+                countriesToDisplay,
+                state.sorting,
+                state.filtersContinent,
+                state.filtersActivities,
+                filterCountries
+            );
+            return {
+                ...state,
+                countries: countries,
+            };
         case OPEN_SIDEBAR: {
             return {
                 ...state,

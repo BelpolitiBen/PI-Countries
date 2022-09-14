@@ -2,7 +2,6 @@ import React from 'react'
 import { StyledPagination } from './styles/Pagination.styled'
 
 function Pagination({currentPage, pagination, pageNumbers}) {
-  console.log(pageNumbers)
   return (
     <StyledPagination>
       <ul>

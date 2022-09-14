@@ -6,6 +6,10 @@ export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const OPEN_SIDEBAR = "OPEN_SIDEBAR";
 export const GET_COUNTRY_NAMES = "GET_COUNTRY_NAMES";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
+export const SORTING = "SORTING";
+export const FILTER_BY_ACTIVITIES = "FILTER_BY_ACTIVITIES";
+export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
+export const DISPLAY_COUNTRIES = "DISPLAY_COUNTRIES";
 
 export const getCountries = () => {
     return async function (dispatch) {
@@ -53,6 +57,32 @@ export const getActivities = () => {
         return dispatch({ type: GET_ACTIVITIES, payload: res.data });
     };
 };
+
+export function sorting(payload) {
+    return {
+        type: SORTING,
+        payload,
+    };
+}
+export function filterByActivities(payload) {
+    return {
+        type: FILTER_BY_ACTIVITIES,
+        payload,
+    };
+}
+
+export function filterByContinent(payload) {
+    return {
+        type: FILTER_BY_CONTINENT,
+        payload,
+    };
+}
+
+export function displayCountries() {
+    return {
+        type: DISPLAY_COUNTRIES,
+    };
+}
 
 export const openSidebar = (payload) => {
     return {
