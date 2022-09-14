@@ -1,4 +1,4 @@
-const { Country } = require("../../db");
+const { Country, Activity } = require("../../db");
 const { fn, col, where } = require("sequelize");
 
 const getCountries = async (req, res) => {
@@ -15,6 +15,13 @@ const getCountries = async (req, res) => {
                         "%" + lcName + "%"
                     ),
                 },
+                include: {
+                    model: Activity,
+                    attributes: ["activityName"],
+                    through: {
+                        attributes: [],
+                    },
+                },
             });
             res.json(countries);
         } catch (error) {
@@ -22,7 +29,15 @@ const getCountries = async (req, res) => {
         }
     } else {
         try {
-            const response = await Country.findAll();
+            const response = await Country.findAll({
+                include: {
+                    model: Activity,
+                    attributes: ["activityName"],
+                    through: {
+                        attributes: [],
+                    },
+                },
+            });
             res.json(response);
         } catch (error) {
             console.log(error);
