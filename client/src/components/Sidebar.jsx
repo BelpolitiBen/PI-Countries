@@ -10,32 +10,32 @@ function Sidebar() {
     const sidebar = useSelector((state) => state?.sidebar)
     return (
         <StyledSidebar>
-            <aside class={`sidebar ${sidebar}`}>
-                <div class="middle-sidebar">
-                    <ul class="sidebar-list">
-                        <li class="sidebar-list-item active">
-                            <Link to="/activities/add" class="sidebar-link">
+            <aside className={`sidebar ${sidebar}`}>
+                <div className="middle-sidebar">
+                    <ul className="sidebar-list">
+                        <li className="sidebar-list-item active">
+                            <Link to="/activities/add" className="sidebar-link">
                                 <AddIcon className="sidebar-icon"/>
-                                <div class="hidden-sidebar"><p>Add a New Activity!</p></div>
-                                <p class="hover">Add a New Activity!</p>
+                                <div className="hidden-sidebar"><p>Add a New Activity!</p></div>
+                                <p className="hover">Add a New Activity!</p>
                             </Link>
                         </li>
-                        <li class="sidebar-list-item">
-                            <a href="" class="sidebar-link">
+                        <li className="sidebar-list-item">
+                            <a href="" className="sidebar-link">
                               <FavoriteIcon className="sidebar-icon"/>
-                              <div class="hidden-sidebar"><p>Favorite Activities</p></div>
-                              <p class="hover">Favorite Activities</p>
+                              <div className="hidden-sidebar"><p>Favorite Activities</p></div>
+                              <p className="hover">Favorite Activities</p>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="bottom-sidebar">
-                    <ul class="sidebar-list">
-                        <li class="sidebar-list-item">
-                            <a href="" class="sidebar-link">
+                <div className="bottom-sidebar">
+                    <ul className="sidebar-list">
+                        <li className="sidebar-list-item">
+                            <a href="" className="sidebar-link">
                                 <ReloadIcon className="sidebar-icon"/>
-                                <div class="hidden-sidebar"><p>Reload Countries</p></div>
-                                <p class="hover">Reload Countries</p>
+                                <div className="hidden-sidebar"><p>Reload Countries</p></div>
+                                <p className="hover">Reload Countries</p>
                             </a>
                         </li>
                     </ul>
