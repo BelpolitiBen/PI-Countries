@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4,
             },
-            name: {
+            activityName: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true,
@@ -24,8 +24,8 @@ module.exports = (sequelize) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            season: {
-                type: DataTypes.ENUM("Winter", "Spring", "Summer", "Fall"),
+            seasons: {
+                type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull: false,
             },
         },

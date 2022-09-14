@@ -3,15 +3,22 @@ const validateActivities = require("../utils/validateActivities");
 const { Op } = require("sequelize");
 
 const postActivity = async (req, res) => {
-    const { name, difficulty, duration, season, countries } = req.body;
-    const errors = validateActivities(name, difficulty, duration, season);
+    const { activityName, difficulty, duration, seasons, countries } = req.body;
+    const errors = validateActivities(
+        activityName,
+        difficulty,
+        duration,
+        seasons
+    );
     if (Object.values(errors).length) return res.send(errors).sendStatus(400);
+    console.log(seasons);
+    console.log(countries);
     try {
         const newActivity = await Activity.create({
-            name,
+            activityName,
             difficulty,
             duration,
-            season,
+            seasons,
         });
         const foundCountries = await Country.findAll({
             where: { name: { [Op.in]: countries } },

@@ -1,9 +1,20 @@
 const axios = require("axios");
-
+const { Country, Activity } = require("../../db");
 const getCountryById = async (req, res) => {
     const { id } = req.params;
     try {
-        const response = await axios(
+        const country = await Country.findAll({
+            where: { id: id },
+            include: {
+                model: Activity,
+                attributes: ["activityName"],
+                through: {
+                    attributes: [],
+                },
+            },
+        });
+        res.json(country);
+        /* const response = await axios(
             `https://restcountries.com/v3/alpha/${id}`
         );
         if (response.status >= 400) {
@@ -23,7 +34,7 @@ const getCountryById = async (req, res) => {
             area: area,
             population: population,
         };
-        res.json(usefulData);
+        res.json(usefulData); */
     } catch (err) {
         console.log(err);
     }
