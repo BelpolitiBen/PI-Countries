@@ -22,10 +22,10 @@ function App() {
         <StyledApp>
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                <Route
+                {/* <Route
                     path={["/home", "/countries", "/activities"]}
                     component={Navbar}
-                />
+                /> */}
                 <div className="grid">
                     <Route exact path="/" component={Landing} />
                     <Route

@@ -4,14 +4,6 @@ import styled from "styled-components";
 
 export const StyledSidebar = styled.div`
     display: flex;
-    --accent-color: rgb(204, 0, 0);
-    --lightest-gray: rgb(244, 244, 244);
-    --light-gray: rgb(144, 144, 144);
-    --lighter-gray: rgb(204, 204, 204);
-    --medium-gray: rgb(96, 96, 96);
-    --dark-gray: rgb(13, 13, 13);
-    --header-height: 47px;
-    --text-secondary: rgb(96, 96, 96);
     --animation-duration: 300ms;
     --animation-timing-curve: ease-in;
 
@@ -22,7 +14,7 @@ export const StyledSidebar = styled.div`
         border-right: 1px solid ${({ theme }) => theme.colors.shadow};
         display: flex;
         flex-direction: column;
-        height: calc(100vh - var(--header-height));
+        height: calc(100vh);
         padding-top: 1rem;
         align-items: center;
         justify-content: stretch;
@@ -30,7 +22,6 @@ export const StyledSidebar = styled.div`
             var(--animation-timing-curve);
         position: sticky;
         left: 0;
-        top: var(--header-height);
     }
 
     .sidebar .hidden-sidebar {
@@ -89,6 +80,15 @@ export const StyledSidebar = styled.div`
         font-size: 14px;
         padding-left: 25px;
         height: 48px;
+    }
+    .sidebar-link.menu {
+        background-color: ${({ theme }) => theme.colors.mainBackground};
+        border: none;
+        :hover {
+            background-color: ${({ theme }) =>
+                theme.colors.secondaryBackground};
+            cursor: pointer;
+        }
     }
 
     .sidebar-list-item {
