@@ -42,22 +42,22 @@ const displayFunction = (
             });
             break;
         case "Largest Pop.":
-            sortedArr = activitiesFiltered.sort((a, b) => {
-                if (a.population > b.population) {
+            sortedArr = activitiesFiltered.sort(function (a, b) {
+                if (a.population < b.population) {
                     return 1;
                 }
-                if (a.population < b.population) {
+                if (a.population > b.population) {
                     return -1;
                 }
                 return 0;
             });
             break;
         case "Smallest Pop.":
-            sortedArr = activitiesFiltered.sort(function (a, b) {
-                if (a.population < b.population) {
+            sortedArr = activitiesFiltered.sort((a, b) => {
+                if (a.population > b.population) {
                     return 1;
                 }
-                if (a.population > b.population) {
+                if (a.population < b.population) {
                     return -1;
                 }
                 return 0;
