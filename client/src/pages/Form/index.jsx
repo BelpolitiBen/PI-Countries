@@ -7,6 +7,7 @@ import validator from "../../utils/validator";
 import InputButton from "../../components/InputButton";
 import { StyledContainer } from "./styles/Container.styled";
 import Dropdown from "../../components/Dropdown";
+import durationHelper from "../../utils/durationHelper";
 
 const Form = () => {
     const dispatch = useDispatch()
@@ -14,7 +15,13 @@ const Form = () => {
     const activities = useSelector((state) => state?.activities)
     const countries = useSelector((state) => state?.allCountries)
     const countryNames = countries?.map(e => e.name)
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({activateSubmit : false})
+    const [time, setTime] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+    })
+
     const [input, setInput] = useState({
         activityName: '',
         difficulty: 0,
@@ -22,22 +29,45 @@ const Form = () => {
         seasons: [],
         countries: [],
     })
-
+    
     useEffect(() => {
       dispatch(getCountries())
       dispatch(getActivities())
     }, [dispatch])
+
+    useEffect(() => {
+      setInput({...input, duration: durationHelper(time)})
+    }, [time])
+    
+    
     
 
     const handleChange = (e) => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-        setErrors(validator({
-            ...input,
-            [e.target.name]: e.target.value
-        }))
+        const {value, name} = e.target
+        if (name === "difficulty") {
+            let difficulty = 0
+            if (value > 5) difficulty = 5
+            else if (value < 0) difficulty = 0
+            else difficulty = parseInt(value)
+            setInput({
+                ...input,
+                [name]: difficulty
+            })
+            setErrors(validator({
+                ...input,
+                [name]: difficulty
+            }))
+        } else {
+            setInput({
+                ...input,
+                [name]: value
+            })
+            setErrors(validator({
+                ...input,
+                [name]: value
+            }))
+        }
+        
     }
     const handleChangeArrays = (e) => {
         let arr = [...input[e.target.name]]
@@ -51,9 +81,28 @@ const Form = () => {
               setErrors(validator({...input, [e.target.name] : arr}))
     }
     const handleDuration = (e) => {
-      const {name, value} = e.target
-
+        const {name, value} = e.target
+        const usefulValue = parseInt(value) < 0 ? 0 : parseInt(value)
+        switch (name) {
+          case "days":
+              setTime({...time, [name]: usefulValue})
+              break;
+          case "hours": 
+              setTime({...time, days: time.days + Math.floor(usefulValue/24), [name]: usefulValue % 24})
+              break;
+          case "minutes":
+              const hours = time.hours + Math.floor(usefulValue/60)
+              const days = time.days + Math.floor(hours/24)
+              setTime({...time, days: days, hours: hours % 24, [name]: usefulValue % 60})
+              break;
+          default:
+              break;
+        }
+        setErrors(validator({...input, duration: parseInt(value)}))
+        console.log(value)
     }
+    
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(errors).length) {
@@ -86,17 +135,17 @@ const Form = () => {
                     </div>
                     <div className="input">
                         <label >Difficulty </label>
-                        <input className="numberInput"type="number" name="difficulty" onChange={handleChange}/>
+                        <input className="numberInput"type="number" value={input.difficulty} name="difficulty" onChange={handleChange}/>
                         <p className={`error difficulty ${errors.difficulty && "visible"}`}>Difficulty rating required</p>
                     </div>
                     <div className="input">
                         <label >Duration (Hs) </label>
                         <div className="duration">
-                          <input className="numberInput"type="number" name="duration" onChange={handleChange}/>
+                          <input className="numberInput"type="number" value={time.days} name="days" onChange={handleDuration}/>
                           <label >D</label>
-                          <input className="numberInput"type="number" name="duration" onChange={handleChange}/>
+                          <input className="numberInput"type="number" value={time.hours} name="hours" onChange={handleDuration}/>
                           <label >H</label>
-                          <input className="numberInput"type="number" name="duration" onChange={handleChange}/>
+                          <input className="numberInput"type="number" value={time.minutes} name="minutes" onChange={handleDuration}/>
                           <label >M</label>
                         </div>
                         {errors.duration && (<p className="error duration">{errors.duration}</p>)}
