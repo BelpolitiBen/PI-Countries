@@ -1,6 +1,5 @@
 import { Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import Form from "./pages/Form";
@@ -22,10 +21,6 @@ function App() {
         <StyledApp>
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                {/* <Route
-                    path={["/home", "/countries", "/activities"]}
-                    component={Navbar}
-                /> */}
                 <div className="grid">
                     <Route exact path="/" component={Landing} />
                     <Route
