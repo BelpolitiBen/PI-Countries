@@ -7,7 +7,6 @@ import Cards from './Cards';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar'
 import Select from './Select'
-import Dropdown from '../../components/Dropdown';
 import { StyledHome } from './styles/Home.styled'
 import { StyledFilterButtons } from './styles/FilterButtons.styled';
 import InputButton from '../../components/InputButton';
@@ -94,10 +93,9 @@ function Home() {
             <h1>Henry Countries</h1>
             <Pagination currentPage={currentPage} pagination={pagination} pageNumbers={pageNumbers}/>
             <div className='container'> 
-                <CustomSelect options={activityNames} placeholder="Touristic activities" clear={clearFilters} values={filtersActivities ? filtersActivities : []} onClick={handleFilters} name="activities"/>
                 <SearchBar/>
                 <Select onChange={handleSort} options={["A-Z", "Z-A", "Largest Pop.", "Smallest Pop."]}/>
-                <Dropdown placeholder="Enter activity name..." input={currentActivityFilters} name="activities" data={activityNames} onClick={handleFilters}/>
+                <CustomSelect options={activityNames} placeholder="Touristic activities" clear={clearFilters} values={filtersActivities ? filtersActivities : []} onClick={handleFilters} name="activities"/>
             </div>
             <StyledFilterButtons>
               <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Africa") && "clicked"} value="Africa"/>
