@@ -22,11 +22,15 @@ export const getCountries = () => {
 };
 
 export const getCountriesByName = (name) => {
+    const usefulName = name === undefined ? "" : name;
     return async function (dispatch) {
         const res = await axios.get(
-            `http://localhost:3001/countries?name=${name}`
+            `http://localhost:3001/countries?name=${usefulName}`
         );
-        return dispatch({ type: GET_COUNTRIES_BY_NAME, payload: res.data });
+        return dispatch({
+            type: GET_COUNTRIES_BY_NAME,
+            payload: { data: res.data, name: usefulName },
+        });
     };
 };
 

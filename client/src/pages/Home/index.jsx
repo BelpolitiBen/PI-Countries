@@ -77,7 +77,6 @@ function Home() {
         if (name === "activities") {
             dispatch(filterByActivities(filters))
         } else dispatch(filterByContinent(filters))
-        setSort(`Sorted by ${value}`)
         dispatch(displayCountries())
         setCurrentPage(1)
     }

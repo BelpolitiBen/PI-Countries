@@ -22,7 +22,7 @@ function App() {
 
     return (
         <StyledApp>
-            <ThemeProvider theme={themeSelector === "dark" ? dark : light}>
+            <ThemeProvider theme={themeSelector === "light" ? light : dark}>
                 <GlobalStyles />
                 <div className="grid">
                     <Route exact path="/" component={Landing} />

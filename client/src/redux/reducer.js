@@ -25,6 +25,7 @@ const initialState = {
     filtersContinent: [],
     filtersActivities: [],
     sorting: "",
+    lastSearch: "",
     countryDetail: {},
     activities: [],
     error: null,
@@ -42,8 +43,9 @@ export default function reducer(state = initialState, { type, payload }) {
         case GET_COUNTRIES_BY_NAME:
             return {
                 ...state,
-                countriesByName: payload,
-                countries: payload,
+                countriesByName: payload.data,
+                countries: payload.data,
+                lastSearch: payload.name,
             };
         case GET_COUNTRY_NAMES: {
             return {

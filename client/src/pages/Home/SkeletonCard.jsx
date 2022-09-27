@@ -1,14 +1,14 @@
 import React from "react";
 import { StyledCard } from "./styles/Card.styled";
 
-const SkeletonCard = ({id, name, background_image, released, metacritic}) => {
+const SkeletonCard = () => {
 
     return (
         <StyledCard className="card">
             <div className="header">
                     <img
                         src=""
-                        className="header-img skeleton" alt="Img not found"
+                        className="header-img skeleton" alt="Skeleton"
                     />
                 </div>
                 <div class="title" data-title>

@@ -81,6 +81,7 @@ export const StyledSidebar = styled.div`
         font-size: 14px;
         padding-left: 25px;
         height: 48px;
+        cursor: pointer;
     }
     .sidebar-link.menu {
         background-color: ${({ theme }) => theme.colors.mainBackground};
@@ -88,7 +89,6 @@ export const StyledSidebar = styled.div`
         :hover {
             background-color: ${({ theme }) =>
                 theme.colors.secondaryBackground};
-            cursor: pointer;
         }
     }
 
