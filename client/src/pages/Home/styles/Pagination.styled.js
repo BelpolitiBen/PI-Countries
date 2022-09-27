@@ -22,6 +22,14 @@ export const StyledPagination = styled.nav`
                 color: ${({ theme }) => theme.colors.lightBlue};
             }
         }
+        .arrow {
+            opacity: 0;
+            cursor: default;
+        }
+        .arrow.visible {
+            opacity: 100;
+            cursor: pointer;
+        }
         .current button {
             color: ${({ theme }) => theme.colors.lightBlue};
             :hover {

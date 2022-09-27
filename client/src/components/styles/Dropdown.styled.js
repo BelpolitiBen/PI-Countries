@@ -3,27 +3,54 @@ import styled from "styled-components";
 export const StyledDropdown = styled.div`
     position: relative;
     padding: 0;
-    .searchInputs {
-        display: flex;
-    }
 
-    .searchInputs input {
-        color: ${({ theme }) => theme.colors.secondaryText};
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
-        box-shadow: 0 1px 10px ${({ theme }) => theme.colors.shadow};
+    .dropdownContainer {
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 30px ${({ theme }) => theme.colors.shadow};
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
+        height: 2rem;
         border: none;
         border-radius: 0.5em;
+        color: ${({ theme }) => theme.colors.overlayText};
         margin: 0;
-        height: 2rem;
-        cursor: text;
+        input {
+            background-color: ${({ theme }) =>
+                theme.colors.secondaryBackground};
+            color: ${({ theme }) => theme.colors.overlayText};
+            border: none;
+            border-radius: 0.5em;
+            :focus {
+                outline: none;
+            }
+        }
+        button {
+            box-shadow: none;
+            padding: 1px 4px;
+            background-color: ${({ theme }) =>
+                theme.colors.secondaryBackground};
+            cursor: pointer;
+            border: none;
+            border-radius: 0.5em;
+            overflow: hidden;
+            color: ${({ theme }) => theme.colors.overlayText};
+            :hover {
+                color: ${({ theme }) => theme.colors.lightBlue};
+            }
+        }
     }
-
-    .searchInputs input:focus {
-        outline: none;
+    #fake {
+        cursor: default;
+        :hover {
+            color: ${({ theme }) => theme.colors.overlayText};
+        }
+    }
+    #clearBtn {
+        cursor: pointer;
     }
 
     .dataResult {
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
         position: absolute;
         width: 100%;
         top: 40px;
@@ -36,7 +63,7 @@ export const StyledDropdown = styled.div`
     }
 
     .dataResult .dataItem {
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
         border-radius: 0;
         width: 100%;
         padding: 0;
@@ -63,9 +90,5 @@ export const StyledDropdown = styled.div`
 
     a:hover {
         background-color: lightgrey;
-    }
-
-    #clearBtn {
-        cursor: pointer;
     }
 `;

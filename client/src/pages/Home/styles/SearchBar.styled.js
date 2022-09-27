@@ -2,22 +2,25 @@ import styled from "styled-components";
 
 export const StyledSearchBar = styled.div`
     display: flex;
-    position: relative;
+    box-shadow: 0 4px 30px ${({ theme }) => theme.colors.shadow};
+    background-color: ${({ theme }) => theme.colors.secondaryBackground};
+    height: 2rem;
+    border: none;
+    border-radius: 0.5em;
+    color: ${({ theme }) => theme.colors.overlayText};
+    margin: 0;
     input {
-        box-shadow: 0 4px 30px ${({ theme }) => theme.colors.shadow};
-        height: 2rem;
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
+        color: ${({ theme }) => theme.colors.overlayText};
         border: none;
         border-radius: 0.5em;
-        color: ${({ theme }) => theme.colors.overlayText};
-        margin: 0;
+        :focus {
+            outline: none;
+        }
     }
     button {
         box-shadow: none;
-        position: absolute;
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
-        top: 3px;
-        right: 3px;
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
         cursor: pointer;
         border: none;
         border-radius: 0.5em;

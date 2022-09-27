@@ -22,6 +22,7 @@ export const StyledSidebar = styled.div`
             var(--animation-timing-curve);
         position: sticky;
         left: 0;
+        top: 0;
     }
 
     .sidebar .hidden-sidebar {

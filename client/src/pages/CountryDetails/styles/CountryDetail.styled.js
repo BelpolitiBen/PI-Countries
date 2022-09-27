@@ -5,14 +5,19 @@ export const StyledDetail = styled.div`
     flex-direction: column;
     align-items: flex-start;
     padding: 0 30%;
-    div {
-        width: 150%;
+    #container {
         display: flex;
         flex-direction: row;
+        width: 150%;
     }
-    ul {
+    #activities {
         background-color: ${({ theme }) => theme.colors.thirdBackground};
         padding: 0 20px;
+        margin-top: 0;
+    }
+
+    #activitiesLabel {
+        margin-top: 0;
     }
     img {
         margin-right: 10px;
@@ -24,7 +29,7 @@ export const StyledDetail = styled.div`
         max-width: 600px;
         object-position: center;
     }
-    p {
+    .mainBody {
         text-align: start;
         white-space: pre-line;
     }

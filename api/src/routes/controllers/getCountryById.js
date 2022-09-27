@@ -7,7 +7,6 @@ const getCountryById = async (req, res) => {
             where: { id: id },
             include: {
                 model: Activity,
-                attributes: ["activityName"],
                 through: {
                     attributes: [],
                 },

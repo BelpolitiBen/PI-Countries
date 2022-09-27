@@ -8,9 +8,11 @@ const postActivity = async (req, res) => {
         activityName,
         difficulty,
         duration,
-        seasons
+        seasons,
+        countries
     );
-    if (Object.values(errors).length) return res.send(errors).sendStatus(400);
+    console.log(activityName);
+    if (Object.values(errors).length) return res.status(400).json(errors);
     console.log(seasons);
     console.log(countries);
     try {
@@ -24,8 +26,9 @@ const postActivity = async (req, res) => {
             where: { name: { [Op.in]: countries } },
         });
         newActivity.addCountry(foundCountries);
-        return res.status(201).send("Game added successfully!");
+        res.status(201).send("Activity added successfully!");
     } catch (error) {
+        res.status(400).send(error);
         console.log(error);
     }
 };

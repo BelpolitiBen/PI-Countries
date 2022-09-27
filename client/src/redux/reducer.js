@@ -2,6 +2,8 @@ import displayFunction from "../utils/displayFunction";
 import filterCountries from "../utils/filterCountries";
 import {
     ADD_ACTIVITY,
+    CLEAR_ALL,
+    CLEAR_DETAIL,
     DISPLAY_COUNTRIES,
     FILTER_BY_ACTIVITIES,
     FILTER_BY_CONTINENT,
@@ -10,7 +12,7 @@ import {
     GET_COUNTRIES_BY_NAME,
     GET_COUNTRY_DETAIL,
     GET_COUNTRY_NAMES,
-    OPEN_SIDEBAR,
+    POST_ERROR,
     SORTING,
 } from "./actions";
 
@@ -24,7 +26,7 @@ const initialState = {
     sorting: "",
     countryDetail: {},
     activities: [],
-    sidebar: "",
+    error: null,
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -97,13 +99,29 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 countries: countries,
             };
-        case OPEN_SIDEBAR: {
+        case POST_ERROR:
             return {
                 ...state,
-                sidebar: payload,
+                error: payload,
             };
-        }
-
+        case CLEAR_DETAIL:
+            return {
+                ...state,
+                countryDetail: {},
+            };
+        case CLEAR_ALL:
+            return {
+                ...state,
+                allCountries: [],
+                countriesByName: [],
+                countries: [],
+                countryNames: [],
+                filtersContinent: [],
+                filtersActivities: [],
+                sorting: "",
+                countryDetail: {},
+                activities: [],
+            };
         default:
             break;
     }

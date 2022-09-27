@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import{useDispatch, useSelector} from "react-redux";
 import { getActivities, getCountries, getCountryDetail } from "../../redux/actions";
+import ActivityCards from "./ActivityCards";
 import { StyledDetail } from "./styles/CountryDetail.styled";
 
 /* 
@@ -27,18 +28,21 @@ const CountryDetails = (props) => {
   return (
     <StyledDetail>
             <h2>{name}</h2>
-            <div>
-                <img src={flag} alt="Not Found" />
-                <ul>
-                    <h4>Touristic Activities</h4>
-                    {activities?.map(a => <h5>{a.activityName}</h5>)}
+            <div id="container">
+                <div>
+                  <img src={flag} alt="Not Found" />
+                  <h3>{region}</h3>
+                  <h5>Capital: {capital}</h5>
+                  <p>Subregion: {subregion}</p>
+                  <p>Area in km2: {area}</p>
+                  <p>Population: {population}</p>
+                </div>
+                <ul id="activities">
+                    <h4 id="activitiesLabel">Touristic Activities</h4>
+                    <ActivityCards activities={activities}/>
                 </ul>
             </div>
-            <h3>{region}</h3>
-            <h5>{capital}</h5>
-            <p>{subregion}</p>
-            <p>{area}</p>
-            <p>{population}</p>
+            
     </StyledDetail>
   )
 }

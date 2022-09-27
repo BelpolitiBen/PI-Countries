@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const StyledCards = styled.div`
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     padding: 0 10px;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 1rem;
+    justify-content: center;
     align-items: flex-start;
     a {
         text-decoration: none;

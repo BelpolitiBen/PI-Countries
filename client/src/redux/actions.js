@@ -10,6 +10,9 @@ export const SORTING = "SORTING";
 export const FILTER_BY_ACTIVITIES = "FILTER_BY_ACTIVITIES";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const DISPLAY_COUNTRIES = "DISPLAY_COUNTRIES";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const CLEAR_ALL = "CLEAR_ALL";
+export const POST_ERROR = "POST_ERROR";
 
 export const getCountries = () => {
     return async function (dispatch) {
@@ -43,11 +46,15 @@ export const getCountryDetail = (id) => {
 
 export function addActivity(payload) {
     return async function (dispatch) {
-        const res = await axios.post(
-            `http://localhost:3001/activities/add`,
-            payload
-        );
-        return res;
+        try {
+            const res = await axios.post(
+                `http://localhost:3001/activities/add`,
+                payload
+            );
+            return res;
+        } catch (error) {
+            return dispatch({ type: POST_ERROR, payload: error });
+        }
     };
 }
 
@@ -84,9 +91,14 @@ export function displayCountries() {
     };
 }
 
-export const openSidebar = (payload) => {
+export function clearDetail() {
     return {
-        type: OPEN_SIDEBAR,
-        payload,
+        type: CLEAR_DETAIL,
     };
-};
+}
+
+export function clearAll() {
+    return {
+        type: CLEAR_ALL,
+    };
+}

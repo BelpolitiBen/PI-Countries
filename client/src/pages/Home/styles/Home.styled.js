@@ -8,8 +8,3 @@ export const StyledHome = styled.div`
         gap: 10px;
     }
 `;
-/*     }
-    .clicked {
-        background-color: ${({ theme }) => theme.colors.green};
-    }
-`; */

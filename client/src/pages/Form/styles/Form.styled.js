@@ -26,29 +26,42 @@ export const StyledForm = styled.div`
     .clicked {
         background-color: ${({ theme }) => theme.colors.green};
     }
-    ul input {
-        background-color: ${({ theme }) => theme.colors.lightBlue};
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 0.25em;
-        cursor: pointer;
-        :hover {
-            opacity: 0.9;
-            transform: scale(0.98);
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin-top: 0;
+        li {
+            padding-top: 0;
         }
+        input {
+            background-color: ${({ theme }) => theme.colors.lightBlue};
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 0.25em;
+            cursor: pointer;
+            :hover {
+                opacity: 0.9;
+                transform: scale(0.98);
+            }
+        }
+    }
+    li {
+        padding: 10px 0;
     }
     .textInput,
     .numberInput,
     .selected {
         color: ${({ theme }) => theme.colors.secondaryText};
-        background-color: ${({ theme }) => theme.colors.thirdBackground};
+        background-color: ${({ theme }) => theme.colors.secondaryBackground};
         box-shadow: 0 4px 10px ${({ theme }) => theme.colors.shadow};
         border: none;
         border-radius: 0.5em;
         margin-top: 3px;
     }
-    .selected {
+    #selectedCountries {
         margin-top: 10px;
         width: fit-content;
         align-self: center;
@@ -83,16 +96,9 @@ export const StyledForm = styled.div`
             margin-right: 0;
         }
     }
-    ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-    }
-    li {
-        padding: 10px 0;
-    }
-    button {
+
+    .seasons button,
+    .submit {
         cursor: pointer;
         border: none;
         border-radius: 0.5em;

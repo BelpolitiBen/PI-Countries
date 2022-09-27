@@ -4,8 +4,8 @@ export const StyledCard = styled.div`
     box-shadow: 0 2px 15px 0 ${({ theme }) => theme.colors.shadow};
     border-radius: 0.25rem;
     overflow: hidden;
-    background-color: ${({ theme }) => theme.colors.thirdBackground};
-    max-width: 600px;
+    background-color: ${({ theme }) => theme.colors.secondaryBackground};
+    width: 345px;
 
     .card-header {
         font-size: 1.5rem;
@@ -30,7 +30,12 @@ export const StyledCard = styled.div`
     }
     .card-body {
         padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
         color: ${({ theme }) => theme.colors.mainText};
+        h4 {
+            max-height: 21px;
+        }
     }
     :hover > .card-body {
         color: ${({ theme }) => theme.colors.lightBlue};

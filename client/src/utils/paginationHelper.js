@@ -9,7 +9,7 @@ const currentPageFunc = (currentPage, countriesPerPage) => {
 };
 
 const countriesFunc = (countries, countriesPerPage) => {
-    const pageNumbers = [1];
+    const pageNumbers = countries === 0 ? [] : [1];
     const maxPages = Math.ceil((countries - 9) / countriesPerPage);
     if (countries > 9) {
         for (let i = 1; i <= maxPages; i++) {
