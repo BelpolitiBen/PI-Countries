@@ -47,7 +47,7 @@ const CountryDetails = (props) => {
                       <ActivityCards activities={detail?.activities}/>
                   </ul>
                 </div>
-            </StyledDetail> : <h5>Loading...</h5>
+            </StyledDetail> : <h1>Loading...</h1>
         }
     </>
   )

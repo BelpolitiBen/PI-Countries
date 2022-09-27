@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useHistory} from 'react-router-dom'
 import { getCountries, addActivity, getActivities, clearDetail } from "../../redux/actions";
 import { StyledForm } from "./styles/Form.styled";
 import validator from "../../utils/validator";
@@ -11,7 +10,6 @@ import CustomSelect from "../../components/CustomSelect";
 
 const Form = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const countries = useSelector((state) => state?.allCountries)
     const activities = useSelector((state) => state?.activities)
     const activityNames = activities?.map(e => e.activityName)
@@ -77,19 +75,11 @@ const Form = () => {
                 ...input,
                 [name]: difficulty
             })
-            /* setErrors(validator(activityNames, {
-                ...input,
-                [name]: difficulty
-            })) */
         } else {
             setInput({
                 ...input,
                 [name]: value
             })
-            /* setErrors(validator(activityNames, {
-                ...input,
-                [name]: value
-            })) */
         }
     }
 
@@ -103,7 +93,6 @@ const Form = () => {
                   ...input,
                   [e.target.name]: arr
               })
-              /* setErrors(validator(activityNames, {...input, [e.target.name] : arr})) */
     }
 
     const handleDuration = (e) => {
@@ -138,12 +127,17 @@ const Form = () => {
             dispatch(addActivity(input))
             setInput({
                 activityName: '',
-                difficulty: 1,
-                duration: 1,
+                difficulty: 0,
+                duration: 0,
                 seasons: [],
                 countries: [],
             })
-            history.push("/home")
+            setTime({
+                days: 0,
+                hours: 0,
+                minutes: 0
+            })
+            setFlag(false)
             alert("Activity added!")
         }
     }
@@ -155,7 +149,7 @@ const Form = () => {
                 <StyledContainer>
                     <div className="input">
                         <label >Name </label>
-                        <input className="textInput"type="text" name="activityName" onChange={handleChange}/>
+                        <input className="textInput"type="text" value={input.activityName} name="activityName" onChange={handleChange}/>
                         {errors.activityName && flag ? (<p className="error activityName">{errors.activityName}</p>) : <></>}
                     </div>
                     <div className="input">
