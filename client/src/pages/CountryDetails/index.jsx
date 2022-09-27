@@ -16,8 +16,7 @@ Los campos mostrados en la ruta principal para cada país (imagen de la bandera,
 const CountryDetails = (props) => {
   const id = props.match.params.id
   const dispatch = useDispatch()
-  const {name, flag, region, capital, subregion, area, population, activities} = useSelector(state => state.countryDetail)
-
+  const detail = useSelector(state => state?.countryDetail)
   useEffect(() => {
     dispatch(getCountries())
     dispatch(getCountryDetail(id))
@@ -27,19 +26,19 @@ const CountryDetails = (props) => {
 
   return (
     <StyledDetail>
-            <h2>{name}</h2>
+            <h2>{detail?.name}</h2>
             <div id="container">
                 <div>
-                  <img src={flag} alt="Not Found" />
-                  <h3>{region}</h3>
-                  <h5>Capital: {capital}</h5>
-                  <p>Subregion: {subregion}</p>
-                  <p>Area in km2: {area}</p>
-                  <p>Population: {population}</p>
+                  <img src={detail?.flag} alt="Not Found" />
+                  <h3>{detail?.region}</h3>
+                  <h5>Capital: {detail?.capital}</h5>
+                  <p>Subregion: {detail?.subregion}</p>
+                  <p>Area in km2: {detail?.area}</p>
+                  <p>Population: {detail?.population}</p>
                 </div>
                 <ul id="activities">
                     <h4 id="activitiesLabel">Touristic Activities</h4>
-                    <ActivityCards activities={activities}/>
+                    <ActivityCards activities={detail?.activities}/>
                 </ul>
             </div>
             
