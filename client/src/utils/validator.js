@@ -4,7 +4,6 @@ const validator = (
 ) => {
     let errors = {};
     const regex = /^[A-Za-z0-9 ]*$/;
-    console.log(duration);
     if (!activityName) errors.activityName = "Name required";
     else if (!regex.test(activityName))
         errors.activityName = "Name can't contain special characters";
@@ -18,8 +17,8 @@ const validator = (
 
     if (!duration) errors.duration = "Duration required";
     else if (duration < 0) errors.duration = "Duration required";
-    else if (duration > 86400)
-        errors.duration = "Duration can't be over 60 days";
+    else if (duration > 525600)
+        errors.duration = "Duration can't be over a year";
     else if (typeof duration !== "number") errors.duration = "Must be a number";
 
     if (!seasons.length) errors.seasons = "Seasons required";

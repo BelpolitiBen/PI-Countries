@@ -7,5 +7,3 @@ const durationHelper = (time) => {
 };
 
 export default durationHelper;
-
-console.log(durationHelper({ days: 1, hours: 1, minutes: 0 }));

@@ -10,13 +10,11 @@ const displayFunction = (
         : countries.filter((country) =>
               filterFunction(country, continentFilters, "continents")
           );
-    console.log(continentFiltered);
     const activitiesFiltered = !activityFilters.length
         ? continentFiltered
         : continentFiltered.filter((country) =>
               filterFunction(country, activityFilters, "activities")
           );
-    console.log(activitiesFiltered);
     let sortedArr = [];
     switch (sort) {
         case "A-Z":

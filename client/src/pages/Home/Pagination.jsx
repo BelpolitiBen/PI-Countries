@@ -12,8 +12,6 @@ function Pagination({currentPage, pagination, pageNumbers}) {
   const firstSlice = slicer(currentPage, pageNumbers.length)
   const secondSlice = firstSlice + 9
   const iterableNumbers = pageNumbers.slice(firstSlice, secondSlice)
-  console.log(iterableNumbers)
-  console.log(secondSlice)
   return (
     <StyledPagination>
       <ul>

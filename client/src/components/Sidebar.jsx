@@ -1,14 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { StyledSidebar } from './styles/Sidebar.styled'
-import ReloadIcon from './icons/ReloadIcon';
 import AddIcon from './icons/AddIcon';
-import FavoriteIcon from './icons/FavoriteIcon';
 import MenuIcon from './icons/MenuIcon';
 import HomeIcon from './icons/HomeIcon';
-import { clearAll, getCountries } from '../redux/actions';
+import { changeTheme} from '../redux/actions';
+import SunIcon from './icons/SunIcon';
+import MoonIcon from './icons/MoonIcon';
 
 function Sidebar() {
     const dispatch = useDispatch()
@@ -21,13 +21,12 @@ function Sidebar() {
     }
     const handleActive = (e) => {
         const activeTab = e.currentTarget.name
-        console.log(activeTab)
         setActive(activeTab)
     }
-    const handleReload = () => {
-        dispatch(clearAll())
-        dispatch(getCountries())
+    const handleTheme = () => {
+        dispatch(changeTheme())
     }
+    const theme = useSelector(state => state?.theme)
     return (
         <StyledSidebar>
             <aside className={`sidebar ${sidebar}`}>
@@ -54,23 +53,16 @@ function Sidebar() {
                                 <p className="hover">Add a New Activity!</p>
                             </Link>
                         </li>
-                        <li className={`sidebar-list-item ${active === "favorite" && "active"}`}>
-                            <a href="" className="sidebar-link" name="favorite" onClick={handleActive}>
-                              <FavoriteIcon className="sidebar-icon"/>
-                              <div className="hidden-sidebar"><p>Favorite Activities</p></div>
-                              <p className="hover">Favorite Activities</p>
-                            </a>
-                        </li>
                     </ul>
                 </div>
                 <div className="bottom-sidebar">
                     <ul className="sidebar-list">
                         <li className="sidebar-list-item">
-                            <Link to="/home" className="sidebar-link" onClick={handleReload}>
-                                <ReloadIcon className="sidebar-icon"/>
-                                <div className="hidden-sidebar"><p>Reload Countries</p></div>
-                                <p className="hover">Reload Countries</p>
-                            </Link>
+                            <div className="sidebar-link" onClick={handleTheme}>
+                                {theme === "dark" ?  <MoonIcon className="sidebar-icon"/> : <SunIcon className="sidebar-icon"/>}
+                                <div className="hidden-sidebar"><p>Change Theme</p></div>
+                                <p className="hover">Change Theme</p>
+                            </div>
                         </li>
                     </ul>
                 </div>

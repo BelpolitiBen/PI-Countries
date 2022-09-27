@@ -109,7 +109,8 @@ const Form = () => {
     const handleDuration = (e) => {
         setFlag(true)
         const {name, value} = e.target
-        const usefulValue = parseInt(value) < 0 ? 0 : parseInt(value)
+        const parsedValue = parseInt(value)
+        const usefulValue = parsedValue <= 0 || isNaN(parsedValue) ? 0 : parsedValue
         switch (name) {
           case "days":
               setTime({...time, [name]: usefulValue})

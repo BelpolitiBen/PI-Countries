@@ -6,7 +6,8 @@ import Form from "./pages/Form";
 import CountryDetails from "./pages/CountryDetails";
 import Landing from "./pages/Landing";
 import { GlobalStyles } from "./styled-components/Global";
-import { theme } from "./styled-components/Theme";
+import { dark, light } from "./styled-components/Theme";
+import { useSelector } from "react-redux";
 
 const StyledApp = styled.div`
     text-align: center;
@@ -17,9 +18,11 @@ const StyledApp = styled.div`
 `;
 
 function App() {
+    const themeSelector = useSelector((state) => state?.theme);
+
     return (
         <StyledApp>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={themeSelector === "dark" ? dark : light}>
                 <GlobalStyles />
                 <div className="grid">
                     <Route exact path="/" component={Landing} />

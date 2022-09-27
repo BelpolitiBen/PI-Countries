@@ -2,6 +2,7 @@ import displayFunction from "../utils/displayFunction";
 import filterCountries from "../utils/filterCountries";
 import {
     ADD_ACTIVITY,
+    CHANGE_THEME,
     CLEAR_ALL,
     CLEAR_DETAIL,
     DISPLAY_COUNTRIES,
@@ -27,6 +28,7 @@ const initialState = {
     countryDetail: {},
     activities: [],
     error: null,
+    theme: "dark",
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -109,18 +111,10 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 countryDetail: {},
             };
-        case CLEAR_ALL:
+        case CHANGE_THEME:
             return {
                 ...state,
-                allCountries: [],
-                countriesByName: [],
-                countries: [],
-                countryNames: [],
-                filtersContinent: [],
-                filtersActivities: [],
-                sorting: "",
-                countryDetail: {},
-                activities: [],
+                theme: state.theme === "dark" ? "light" : "dark",
             };
         default:
             break;

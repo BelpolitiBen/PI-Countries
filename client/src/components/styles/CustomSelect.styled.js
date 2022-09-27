@@ -97,7 +97,7 @@ export const StyledCustomSelect = styled.div`
         background: none;
         outline: none;
         color: ${({ theme }) => theme.colors.mainText};
-        background-color: rgb(30, 42, 56);
+        background-color: ${({ theme }) => theme.colors.thirdBackground};
         .removeBtn {
             color: ${({ theme }) => theme.colors.mainText};
             border: none;
