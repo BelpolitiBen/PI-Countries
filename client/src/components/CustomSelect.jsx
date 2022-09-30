@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { StyledCustomSelect } from './styles/CustomSelect.styled'
+//import { StyledCustomSelect } from './styles/CustomSelect.styled'
 
 function CustomSelect({options, placeholder, values, onClick, name, clear}) {
     const [open, setOpen] = useState(false)
     const clicked = (o) => {
         return values?.includes(o)
     }
-    
+
     return (
-        <StyledCustomSelect onClick={() => setOpen(prev => !prev)}tabIndex={0}>
+        <div onClick={() => setOpen(prev => !prev)}tabIndex={0}>
             <span className='values'>{values?.length <= 2 ? values.map(v => (
                 <button type='button' key={v} className="optionButton" value={v} name={name} onClick={onClick}>{v} &times;</button>
             )) :<>
@@ -31,7 +31,7 @@ function CustomSelect({options, placeholder, values, onClick, name, clear}) {
                     key={`${key}${option}`}>{option}</button>
                 ))}
             </ul>
-        </StyledCustomSelect>
+        </div>
     )
 }
 
