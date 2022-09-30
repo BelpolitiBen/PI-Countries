@@ -1,4 +1,6 @@
 import axios from "axios";
+
+//Acá le dije no a los typos
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_COUNTRIES_BY_NAME = "GET_COUNTRIES_BY_NAME";
 export const ADD_ACTIVITY = "ADD_ACTIVITY";
@@ -28,21 +30,14 @@ export const getCountriesByName = (name) => {
         );
         return dispatch({
             type: GET_COUNTRIES_BY_NAME,
-            payload: { data: res.data, name: usefulName },
+            payload: { data: res.data, name: usefulName }, //Tuve que enviar un objeto con los datos y el nombre como payload para poder mantener el input del usuario en la SearchBar.
         });
-    };
-};
-
-export const getCountryNames = () => {
-    return {
-        type: GET_COUNTRY_NAMES,
     };
 };
 
 export const getCountryDetail = (id) => {
     return async function (dispatch) {
         const res = await axios.get(`http://localhost:3001/countries/${id}`);
-        console.log(res.data);
         return dispatch({ type: GET_COUNTRY_DETAIL, payload: res.data });
     };
 };
@@ -57,6 +52,8 @@ export function addActivity(payload) {
             return res;
         } catch (error) {
             return error.message;
+            /* Acá traté de manejar los estados desde el back pero solo logré confundirme. 
+            Ya pasadas unas semanas desde entonces, me hago algunas ideas de como se implementaría, pero en este proyecto opté por pulir las cosas que ya había hecho. */
         }
     };
 }
