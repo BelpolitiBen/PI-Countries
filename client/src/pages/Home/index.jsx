@@ -108,7 +108,7 @@ function Home() {
                 <>
                     <Pagination currentPage={currentPage} pagination={pagination} pageNumbers={pageNumbers}/>
                     <div className='container'> 
-                        <SearchBar/>
+                        <SearchBar pagination={pagination}/>
                         <Select onChange={handleSort} selectedOption={currentSort ? currentSort : "Sort by..."} options={["A-Z", "Z-A", "Largest Pop.", "Smallest Pop."]}/>
                         <CustomSelect options={activityNames} placeholder="Touristic activities" clear={clearFilters} values={filtersActivities ? filtersActivities : []} onClick={handleFilters} name="activities"/>
                     </div>

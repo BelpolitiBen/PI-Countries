@@ -5,7 +5,7 @@ import SearchIcon from '../../components/icons/SearchIcon';
 import { displayCountries, getCountriesByName } from '../../redux/actions';
 import { StyledSearchBar } from './styles/SearchBar.styled';
 
-function SearchBar() {
+function SearchBar({pagination}) {
     const dispatch = useDispatch()
     const lastSearch = useSelector(state => state?.lastSearch)
     const countries = useSelector(state => state?.countriesByName)
@@ -18,6 +18,7 @@ function SearchBar() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         dispatch(getCountriesByName(name))
+        pagination(1)
     }
     useEffect(() => {
       if (countries && countries.length) dispatch(displayCountries())
