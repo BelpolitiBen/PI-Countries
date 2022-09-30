@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import{useDispatch, useSelector} from "react-redux";
-import { getActivities, getCountryDetail } from "../../redux/actions";
+import { getCountryDetail } from "../../redux/actions";
 import ActivityCards from "./ActivityCards";
 import { StyledDetail } from "./styles/CountryDetail.styled";
 
@@ -8,19 +8,18 @@ const CountryDetails = (props) => {
   const id = props.match.params.id
   const dispatch = useDispatch()
   const detail = useSelector(state => state?.countryDetail)
-  const [flag, setFlag] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     dispatch(getCountryDetail(id))
-    dispatch(getActivities())
   }, [dispatch, id])
   useEffect(() => {
-    if (detail && Object.values(detail).length) setFlag(true)
+    if (detail && Object.values(detail).length) setLoading(true)
   }, [detail])
 
   return (
     <>
-        {flag ? <StyledDetail>
+        {loading ? <StyledDetail>
                 <h2>{detail?.name}</h2>
                   <div id="container">
                   <div>

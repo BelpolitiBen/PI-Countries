@@ -53,7 +53,8 @@ export function addActivity(payload) {
         } catch (error) {
             return error.message;
             /* Acá traté de manejar los estados desde el back pero solo logré confundirme. 
-            Ya pasadas unas semanas desde entonces, me hago algunas ideas de como se implementaría, pero en este proyecto opté por pulir las cosas que ya había hecho. */
+            Ya pasadas unas semanas desde entonces, me hago algunas ideas de como se implementaría, 
+            pero al final opté por pulir las cosas que ya había hecho en lugar de intentar esto otra vez. */
         }
     };
 }

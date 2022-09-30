@@ -23,21 +23,22 @@ const Form = () => {
         }
         return 0;
     });
-    const [errors, setErrors] = useState({activateSubmit : false})
-    const [flag, setFlag] = useState(false)
-    
-    const [time, setTime] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-    })
 
+    const [errors, setErrors] = useState({activateSubmit : false}) //Se inicia con un valor para que el usuario no pueda tocar el botón al entrar a la página.
+    const [flag, setFlag] = useState(false) //Es para que no se muestren los errores hasta que el usuario empieze a interactuar.
+    
+    /* Estados de input */
     const [input, setInput] = useState({
         activityName: '',
         difficulty: 0,
         duration: 0,
         seasons: [],
         countries: [],
+    })
+    const [time, setTime] = useState({ //Esto despues se pasa todo a minutos, que es la unidad de tiempo que cuenta input.duration
+        days: 0,
+        hours: 0,
+        minutes: 0,
     })
 
     const clearCountries = () => {
@@ -48,20 +49,30 @@ const Form = () => {
             }))
     }
     
+    //Dispara las actions que necesita cuando se monta el componente
+
     useEffect(() => {
         dispatch(clearDetail())
         dispatch(getCountries())
         dispatch(getActivities())
     }, [dispatch])
 
+    //Setea la duración en minutos cada vez que se actualiza time
+
     useEffect(() => {
       setInput(i => ({...i, duration: durationHelper(time)}))
     }, [time])
+
+    /* Setea los errores cada vez que se actualiza el input. Me pide que agregue activityNames al array, 
+    pero se rompe cuando lo agrego y ademas no sería la intención. ¿Supongo que es un tema de buenas prácticas? */
 
     useEffect(() => {
         setErrors(validator(activityNames, {...input}))
     }, [input])
     
+
+    /* Handler del nombre y dificultad. No permite que el usuario ingrese numeros menores a 0, decimales, o mayores a 5 en la dificultad. 
+    O valores que no sean numeros, porque parseInt los convierte en NaN. */
 
     const handleChange = (e) => {
         setFlag(true)
@@ -83,17 +94,24 @@ const Form = () => {
         }
     }
 
+    /* Handler de los países y temporadas. */
+
     const handleChangeArrays = (e) => {
         setFlag(true)
-        let arr = [...input[e.target.name]]
-              if(arr.includes(e.target.value)) {
-                  arr = [...arr.filter(x => x !== e.target.value)]
-              } else arr.push(e.target.value)
+        const {value, name} = e.target
+        let arr = [...input[name]]
+              if(arr.includes(value)) {
+                  arr = [...arr.filter(x => x !== value)]
+              } else arr.push(value)
               setInput({
                   ...input,
-                  [e.target.name]: arr
+                  [name]: arr
               })
     }
+
+    /* Handler de la duración. Para que se mantenga dentro de los valores que me interesany que las horas y los dias 
+    se modifiquen a partir de las unidades mas pequeñas de forma correcta, tuve que usar condiciones varias veces. 
+    No permite que el usuario ingrese decimales, caracteres especiales, numeros menores a 0 o letras.*/
 
     const handleDuration = (e) => {
         setFlag(true)
@@ -116,12 +134,12 @@ const Form = () => {
               break;
         }
     }
-    
+    /* Handler del submit. Previene el submit si hay errores, si no despacha la accion, limpia el input, setea el flag en falso y tira una alerta de éxito.
+    Tambien debería manejar los errores que pueden llegar a venir de la acción, pero cuando intenté hacer eso no pude y no volví a intentar.*/
     
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(errors).length) {
-            console.log(errors)
             alert("There is an error in the provided data")
         } else {
             dispatch(addActivity(input))

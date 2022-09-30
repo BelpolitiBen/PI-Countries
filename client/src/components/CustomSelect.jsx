@@ -6,9 +6,9 @@ function CustomSelect({options, placeholder, values, onClick, name, clear}) {
     const clicked = (o) => {
         return values?.includes(o)
     }
-
+    
     return (
-        <StyledCustomSelect /* onBlur={() => setOpen(false)} */ onClick={() => setOpen(prev => !prev)}tabIndex={0}>
+        <StyledCustomSelect onClick={() => setOpen(prev => !prev)}tabIndex={0}>
             <span className='values'>{values?.length <= 2 ? values.map(v => (
                 <button type='button' key={v} className="optionButton" value={v} name={name} onClick={onClick}>{v} &times;</button>
             )) :<>
