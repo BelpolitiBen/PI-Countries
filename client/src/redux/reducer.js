@@ -3,7 +3,6 @@ import filterCountries from "../utils/filterCountries";
 import {
     ADD_ACTIVITY,
     CHANGE_THEME,
-    CLEAR_ALL,
     CLEAR_DETAIL,
     DISPLAY_COUNTRIES,
     FILTER_BY_ACTIVITIES,
@@ -13,7 +12,6 @@ import {
     GET_COUNTRIES_BY_NAME,
     GET_COUNTRY_DETAIL,
     GET_COUNTRY_NAMES,
-    POST_ERROR,
     SORTING,
 } from "./actions";
 
@@ -102,11 +100,6 @@ export default function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 countries: countries,
-            };
-        case POST_ERROR:
-            return {
-                ...state,
-                error: payload,
             };
         case CLEAR_DETAIL:
             return {

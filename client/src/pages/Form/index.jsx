@@ -55,7 +55,7 @@ const Form = () => {
     }, [dispatch])
 
     useEffect(() => {
-      setInput({...input, duration: durationHelper(time)})
+      setInput(i => ({...i, duration: durationHelper(time)}))
     }, [time])
 
     useEffect(() => {
@@ -99,17 +99,17 @@ const Form = () => {
         setFlag(true)
         const {name, value} = e.target
         const parsedValue = parseInt(value)
-        const usefulValue = parsedValue <= 0 || isNaN(parsedValue) ? 0 : parsedValue
+        const usefulValue = parsedValue <= 0 ? 0 : parsedValue
         switch (name) {
           case "days":
               setTime({...time, [name]: usefulValue})
               break;
           case "hours": 
-              setTime({...time, days: time.days + Math.floor(usefulValue/24), [name]: usefulValue % 24})
+              setTime({...time, days: (time.days ? time.days : 0) + (isNaN(usefulValue) ? 0 : Math.floor(usefulValue/24)), [name]: usefulValue % 24})
               break;
           case "minutes":
-              const hours = time.hours + Math.floor(usefulValue/60)
-              const days = time.days + Math.floor(hours/24)
+              const hours = (time.hours ? time.hours : 0) + (isNaN(usefulValue) ? 0 : Math.floor(usefulValue/60))
+              const days = (time.days ? time.days : 0) + Math.floor(hours/24)
               setTime({...time, days: days, hours: hours % 24, [name]: usefulValue % 60})
               break;
           default:

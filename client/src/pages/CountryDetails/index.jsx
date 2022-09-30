@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import{useDispatch, useSelector} from "react-redux";
-import { getActivities, getCountries, getCountryDetail } from "../../redux/actions";
+import { getActivities, getCountryDetail } from "../../redux/actions";
 import ActivityCards from "./ActivityCards";
 import { StyledDetail } from "./styles/CountryDetail.styled";
 

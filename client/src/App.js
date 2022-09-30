@@ -1,13 +1,13 @@
 import { Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Sidebar from "./components/Sidebar";
-import Home from "./pages/Home";
 import Form from "./pages/Form";
 import CountryDetails from "./pages/CountryDetails";
 import Landing from "./pages/Landing";
 import { GlobalStyles } from "./styled-components/Global";
 import { dark, light } from "./styled-components/Theme";
 import { useSelector } from "react-redux";
+import Home from "./pages/Home";
 
 const StyledApp = styled.div`
     text-align: center;

@@ -18,12 +18,14 @@ function Home() {
     const activities = useSelector((state) => state?.activities)
     const filtersActivities = useSelector((state) => state?.filtersActivities)
     const filtersContinent = useSelector((state) => state?.filtersContinent)
+    const currentSort = useSelector((state) => state?.sorting)
     const activityNames = activities?.map(a => a.activityName)
     const countriesLength = countries?.length
     const [currentActivityFilters, setCurrentActivityFilters] = useState([])
     const [currentContinentFilters, setCurrentContinentFilters] = useState(filtersContinent?.length ? [...filtersContinent] : [])
     const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState("")
+    const [pageLoaded, setPageLoaded] = useState(false)
     const [[sliceStart, sliceEnd], pageNumbers] = paginationHelper(currentPage, countriesLength)
     const currentCountries = countries?.slice(sliceStart, sliceEnd)
 
@@ -86,24 +88,33 @@ function Home() {
         dispatch(getCountries())
         dispatch(getActivities())
     }, [dispatch])
+    useEffect(() => {
+        if (countries && countries.length) setPageLoaded(true)
+    }, [countries])
 
     return (
         <StyledHome>
             <h1>Henry Countries</h1>
-            <Pagination currentPage={currentPage} pagination={pagination} pageNumbers={pageNumbers}/>
-            <div className='container'> 
-                <SearchBar/>
-                <Select onChange={handleSort} options={["A-Z", "Z-A", "Largest Pop.", "Smallest Pop."]}/>
-                <CustomSelect options={activityNames} placeholder="Touristic activities" clear={clearFilters} values={filtersActivities ? filtersActivities : []} onClick={handleFilters} name="activities"/>
-            </div>
-            <StyledFilterButtons>
-              <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Africa") && "clicked"} value="Africa"/>
-              <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Americas")  && "clicked"} value="Americas"/>
-              <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Asia")  && "clicked"} value="Asia"/>
-              <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Europe")  && "clicked"} value="Europe"/>
-              <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Oceania")  && "clicked"} value="Oceania"/>
-            </StyledFilterButtons>
-            <Cards countries={currentCountries}/>
+            {pageLoaded ? 
+                <>
+                    <Pagination currentPage={currentPage} pagination={pagination} pageNumbers={pageNumbers}/>
+                    <div className='container'> 
+                        <SearchBar/>
+                        <Select onChange={handleSort} selectedOption={currentSort ? currentSort : "Sort by..."} options={["A-Z", "Z-A", "Largest Pop.", "Smallest Pop."]}/>
+                        <CustomSelect options={activityNames} placeholder="Touristic activities" clear={clearFilters} values={filtersActivities ? filtersActivities : []} onClick={handleFilters} name="activities"/>
+                    </div>
+                    <StyledFilterButtons>
+                      <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Africa") && "clicked"} value="Africa"/>
+                      <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Americas")  && "clicked"} value="Americas"/>
+                      <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Asia")  && "clicked"} value="Asia"/>
+                      <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Europe")  && "clicked"} value="Europe"/>
+                      <InputButton name="continent" onClick={handleFilters} className={filtersContinent?.includes("Oceania")  && "clicked"} value="Oceania"/>
+                    </StyledFilterButtons>
+                    <Cards countries={currentCountries}/>
+                </>
+            : <h2>Loading...</h2>
+            }
+            {pageLoaded && !countriesLength ? <button type='button' className='reload' onClick={() => dispatch(displayCountries())}>Reload</button> : <></>}
         </StyledHome>
     )
 }

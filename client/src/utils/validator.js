@@ -9,6 +9,8 @@ const validator = (
         errors.activityName = "Name can't contain special characters";
     else if (activities.includes(activityName))
         errors.activityName = "This activity already exists";
+    else if (activityName.length > 40)
+        errors.activityName = "This name is too long!";
 
     if (!difficulty) errors.difficulty = "Difficulty rating required";
     else if (difficulty < 0) errors.difficulty = "Difficulty rating required";

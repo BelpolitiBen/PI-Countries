@@ -11,7 +11,6 @@ export const FILTER_BY_ACTIVITIES = "FILTER_BY_ACTIVITIES";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const DISPLAY_COUNTRIES = "DISPLAY_COUNTRIES";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
-export const POST_ERROR = "POST_ERROR";
 export const CHANGE_THEME = "CHANGE_THEME";
 
 export const getCountries = () => {
@@ -57,7 +56,7 @@ export function addActivity(payload) {
             );
             return res;
         } catch (error) {
-            return dispatch({ type: POST_ERROR, payload: error });
+            return error.message;
         }
     };
 }

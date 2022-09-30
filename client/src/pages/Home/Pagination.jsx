@@ -16,11 +16,11 @@ function Pagination({currentPage, pagination, pageNumbers}) {
     <StyledPagination>
       <ul>
         {!pageNumbers.length && <h2>No Countries Found!</h2>}
-        <li ><button className={`arrow ${currentPage > 1 && "visible"}`}onClick={() => {pagination(1)}}>&lt;&lt;</button></li>
-        <li ><button className={`arrow ${currentPage > 1 && "visible"}`}onClick={() => pagination(currentPage > 1 ? currentPage - 1 : 1)}>&lt;</button></li>
+        <li><button className={`arrow ${currentPage > 1 && "visible"}`}onClick={() => {pagination(1)}}>&lt;&lt;</button></li>
+        <li><button className={`arrow ${currentPage > 1 && "visible"}`}onClick={() => pagination(currentPage > 1 ? currentPage - 1 : 1)}>&lt;</button></li>
         {iterableNumbers?.map(number => <li key={number} className={`number ${number === currentPage && "current"}`}><button onClick={() => pagination(number)}>{number}</button></li>)}
-        <li ><button className={`arrow ${currentPage < pageNumbers.length && "visible"}`}onClick={() => pagination(currentPage < pageNumbers.length ? currentPage + 1: currentPage)}>&gt;</button></li>
-        <li ><button className={`arrow ${currentPage < pageNumbers.length && "visible"}`}onClick={() => {pagination(pageNumbers[pageNumbers.length -1])}}>&gt;&gt;</button></li>
+        <li><button className={`arrow ${currentPage < pageNumbers.length && "visible"}`}onClick={() => pagination(currentPage < pageNumbers.length ? currentPage + 1: currentPage)}>&gt;</button></li>
+        <li><button className={`arrow ${currentPage < pageNumbers.length && "visible"}`}onClick={() => {pagination(pageNumbers[pageNumbers.length -1])}}>&gt;&gt;</button></li>
       </ul>
     </StyledPagination>
   )
