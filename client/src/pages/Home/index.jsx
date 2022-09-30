@@ -33,14 +33,8 @@ function Home() {
         setCurrentPage(pageNumber)
     }
     const clearFilters = (name) => {
-        if (name === "activities") {
-            setCurrentActivityFilters([])
-            dispatch(filterByActivities([]))
-        }
-        else {
-            setCurrentContinentFilters([])
-            dispatch(filterByContinent([]))
-        }
+        setCurrentActivityFilters([])
+        dispatch(filterByActivities([]))
         dispatch(displayCountries())
     }
 

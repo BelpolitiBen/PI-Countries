@@ -42,7 +42,6 @@ export default function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 countriesByName: payload.data,
-                countries: payload.data,
                 lastSearch: payload.name,
             };
         case GET_COUNTRY_NAMES: {
