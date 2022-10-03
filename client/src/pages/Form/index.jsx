@@ -117,7 +117,8 @@ const Form = () => {
         setFlag(true)
         const {name, value} = e.target
         const parsedValue = parseInt(value)
-        const usefulValue = parsedValue <= 0 ? 0 : parsedValue
+        const oneYearMax = parsedValue > 365 ? 365 : parsedValue
+        const usefulValue = oneYearMax <= 0 ? 0 : oneYearMax
         switch (name) {
           case "days":
               setTime({...time, [name]: usefulValue})
